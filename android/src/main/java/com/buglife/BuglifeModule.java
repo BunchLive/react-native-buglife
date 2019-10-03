@@ -49,13 +49,17 @@ public class BuglifeModule extends ReactContextBaseJavaModule {
     return constants;
   }
 
-  @ReactMethod
-  public void startWithAPIKey(String apiKey) {
-    Buglife.initWithApiKey(getCurrentActivity().getApplication(), apiKey);
+  private void createListener() {
     if (this.listener == null) {
       this.listener = new RNBuglifeListener(this.reactContext);
       Buglife.setListener(this.listener);
     }
+  }
+
+  @ReactMethod
+  public void startWithAPIKey(String apiKey) {
+    Buglife.initWithApiKey(getCurrentActivity().getApplication(), apiKey);
+    createListener();
   }
 
   @ReactMethod
