@@ -24,6 +24,7 @@ public class BuglifeModule extends ReactContextBaseJavaModule {
   public static final String INVOCATION_METHOD_SCREENSHOT = "invocationOptionsScreenshot";
 
   private final ReactApplicationContext reactContext;
+  private RNBuglifeListener listener;
 
   public BuglifeModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -48,10 +49,13 @@ public class BuglifeModule extends ReactContextBaseJavaModule {
     return constants;
   }
 
-
   @ReactMethod
   public void startWithAPIKey(String apiKey) {
     Buglife.initWithApiKey(getCurrentActivity().getApplication(), apiKey);
+    if (this.listener == null) {
+      this.listener = new RNBuglifeListener(this.reactContext);
+      Buglife.setListener(this.listener);
+    }
   }
 
   @ReactMethod
