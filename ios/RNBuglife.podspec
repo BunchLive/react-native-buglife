@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
   s.description         = <<-DESC
                             A well tested feature rich Buglife implementation for React Native, supporting iOS & Android.
                           DESC
-  s.homepage            = "https://github.com/Buglife/react-native-buglife"
+  s.homepage            = "https://github.com/BunchLive/react-native-buglife"
   s.license             = package['license']
   s.authors             = "Invertase Limited"
-  s.source              = { :git => "https://github.com/Buglife/react-native-buglife.git", :tag => "v#{s.version}" }
+  s.source              = { :git => "https://github.com/BunchLive/react-native-buglife.git", :tag => "v#{s.version}" }
   s.platform            = :ios, "9.0"
   s.source_files        = '*.{h,m}'
   s.dependency          'React'
