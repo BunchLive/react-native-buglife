@@ -33,23 +33,21 @@ RCT_ENUM_CONVERTER(LIFEInvocationOptions, (@{ @"invocationOptionsNone" : @(LIFEI
 
 @implementation RNBuglife
 
+- (instancetype)init
+{
+  if (!(self = [super init])) {
+    return nil;
+  }
+
+  [Buglife sharedBuglife].delegate = self;
+  return self;
+}
+
 RCT_EXPORT_MODULE(Buglife);
 
 RCT_EXPORT_METHOD(setInvocationOptions:(LIFEInvocationOptions)invocationOptions)
 {
     [[Buglife sharedBuglife] setInvocationOptions:invocationOptions];
-}
-
-RCT_EXPORT_METHOD(startWithAPIKey:(NSString *)apiKey)
-{
-    [[Buglife sharedBuglife] startWithAPIKey:apiKey];
-    [Buglife sharedBuglife].delegate = self;
-}
-
-RCT_EXPORT_METHOD(startWithEmail:(NSString *)email)
-{
-    [[Buglife sharedBuglife] startWithEmail:email];
-    [Buglife sharedBuglife].delegate = self;
 }
 
 RCT_EXPORT_METHOD(presentReporter)
@@ -77,19 +75,19 @@ RCT_EXPORT_METHOD(addAttachmentWithJSON:(id)json filename:(NSString *)filename r
 {
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:json options:0 error:&error];
-    
+
     if (!data) {
         reject(error.domain, error.localizedDescription, error);
         return;
     }
-    
+
     [self _addAttachmentWithData:data type:LIFEAttachmentTypeIdentifierJSON filename:filename resolver:resolve rejecter:reject];
 }
 
 RCT_EXPORT_METHOD(addAttachmentWithString:(NSString *)text filename:(NSString *)filename resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     NSData *data = data = [(NSString *)text dataUsingEncoding:NSUTF8StringEncoding];
-    
+
     [self _addAttachmentWithData:data type:LIFEAttachmentTypeIdentifierText filename:filename resolver:resolve rejecter:reject];
 }
 
@@ -97,7 +95,7 @@ RCT_EXPORT_METHOD(addAttachmentWithString:(NSString *)text filename:(NSString *)
 {
     NSError *error = nil;
     BOOL result = [[Buglife sharedBuglife] addAttachmentWithData:data type:type filename:filename error:&error];
-    
+
     if (!result) {
         reject(error.domain, error.localizedDescription, error);
     } else {
@@ -121,10 +119,10 @@ RCT_EXPORT_METHOD(addAttachmentWithString:(NSString *)text filename:(NSString *)
 - (void)buglife:(nonnull Buglife *)buglife handleAttachmentRequestWithCompletionHandler:(nonnull void (^)())completionHandler
 {
     [self sendEventWithName:kBuglifeAttachmentRequestEventName body:@{}];
-    
+
     RCTModuleData *moduleData = [self.bridge moduleDataForName:NSStringFromClass([self class])];
     dispatch_queue_t queue = [moduleData methodQueue];
-    
+
     // calling sendEventWithName:body: causes any Javascript that
     // is listening to that event to be dispatched onto a serial queue.
     // This double-dispatch is a hack to ensure that the completionHandler

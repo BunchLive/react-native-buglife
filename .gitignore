@@ -1,7 +1,86 @@
-*.xcuserstate
-*.DS_STORE
-/ios/RNBuglife.xcodeproj/project.xcworkspace/xcuserdata/danielhd.xcuserdatad/UserInterfaceState.xcuserstate
-/android/build
-/android/.idea
-/android/local.properties
-ios/Buglife-iOS/Buglife.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+## Project
+
+captures/
+
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+#xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+#*.xcuserstate
+#project.xcworkspace
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+android/src/main/res/drawable/
+**/*.*~
+**/*.swp
+**/*.~
+.project
+.settings
+.classpath
+.jest/
+xcuserdata
+*.pbxproj
+*.xcworkspace
+*.zip
+.byebug_history
+Untitled*
+Pods
+**/*~
+xcuserdata*
+**/*/xcuserdata*
+.vscode
+samples/**/package-lock.json
+*.iml
+android/bin
+yarn.lock
+package-lock.json
+docs/api
+
+# Gradle
+**/*/gradle/*
+

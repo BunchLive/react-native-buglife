@@ -6,7 +6,6 @@ declare module "react-native-buglife" {
   const BuglifeAttachmentRequest = "BuglifeAttachmentRequest"
 
   function setInvocationOptions(options: string): void
-  function startWithAPIKey(key: string): void
   function setUserIdentifier(id: string): void
   function setUserEmail(email: string): void
   function presentReporter(): void
